@@ -9,6 +9,7 @@ let config = {
     scale: {
         autoCenter: Phaser.Scale.CENTER_BOTH
     },
+    backgroundColor: '#40372e',
     physics: {
         default: 'arcade',
         arcade: {
@@ -19,7 +20,7 @@ let config = {
             }
         }
     },
-    scene: [ Menu ]
+    scene: [ Menu, Adrenaline ]
 };
 
 const game = new Phaser.Game(config);
