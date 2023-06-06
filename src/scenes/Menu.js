@@ -8,6 +8,7 @@ class Menu extends Phaser.Scene {
         this.load.path = 'assets/';
         // load sprite(s)
         this.load.spritesheet('heart', 'scribbleHeart.png', {frameWidth: 256, frameHeight: 256});
+        this.load.image('cross', 'crosshair.png');
 
     }
 
