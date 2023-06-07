@@ -5,9 +5,15 @@ class Adrenaline extends Phaser.Scene {
 
     create() {
         // variables
-        this.speed = 500;
+        this.speed = 1200;
         this.movespeed = 300;
+        this.numCalmers = 4;
+        this.spinSpeed = 100;
         this.crosshairAlive = true;
+
+
+        // change bg color
+        this.cameras.main.setBackgroundColor('#320554');
 
         // temp text
         this.add.text(centerX, 20, "scene 3: adrenaline shot").setOrigin(0.5);
@@ -37,6 +43,18 @@ class Adrenaline extends Phaser.Scene {
             I can set the bounds of where it can go too
         */
 
+        // add calmer group and add calmers
+        this.calmerGroup = this.add.group();
+        for(let i = 0; i < this.numCalmers; i++) {
+            this.addCalmer();
+        }
+
+        // crosshair-calmer collision
+        this.physics.add.collider(this.crosshair, this.calmerGroup, (player,calmer) => {
+            this.speed -= 300;
+            calmer.destroy();
+        })
+
         // set cursor keys
         this.cursors = this.input.keyboard.createCursorKeys();
         keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
@@ -51,6 +69,15 @@ class Adrenaline extends Phaser.Scene {
             }
         })
 
+    }
+
+    addCalmer() {
+        let randX = Phaser.Math.Between(100, w - 100);
+        let randY = Phaser.Math.Between(100, h - 100);
+        let newCalmer = this.add.sprite(randX, randY, 'square');
+        this.physics.add.existing(newCalmer);
+        newCalmer.body.setAngularVelocity(this.spinSpeed);
+        this.calmerGroup.add(newCalmer);
     }
 
     update() {

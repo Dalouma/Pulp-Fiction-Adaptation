@@ -16,6 +16,7 @@ class Dance extends Phaser.Scene {
         this.noteVelocity = 400;
         this.noteDelay = 1000;
         this.notesDropped = 0;
+        this.win = false;
 
         // change bg color
         this.cameras.main.setBackgroundColor('#cf8b42')
@@ -45,6 +46,10 @@ class Dance extends Phaser.Scene {
         // player-note collision handling
         this.physics.add.collider(this.player, this.noteGroup, (player,note) => {
             note.destroy();
+            if(this.notesDropped > 32){
+                this.win = true;
+                this.nextScene();
+            }
         })
 
         // start note recursion
@@ -73,7 +78,11 @@ class Dance extends Phaser.Scene {
     }
 
     nextScene(){
-
+        if(this.win) {
+            this.scene.start('scene1.1');
+        }else{
+            console.log('rip')
+        }
     }
 
     update() {
