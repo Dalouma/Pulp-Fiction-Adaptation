@@ -17,6 +17,9 @@ class Adrenaline extends Phaser.Scene {
 
         // temp text
         this.add.text(centerX, 20, "scene 3: adrenaline shot").setOrigin(0.5);
+        this.add.text(centerX, 50, "We ONLY have ONE. I can't fuck this up.").setOrigin(0.5);
+        this.add.text(centerX, 80, "Aim carefully.").setOrigin(0.5);
+        this.add.text(centerX, h-20, "ARROWS: move       SPACE: strike").setOrigin(0.5);
 
         // create animations
         this.anims.create({
@@ -30,7 +33,7 @@ class Adrenaline extends Phaser.Scene {
         });
 
         // add beating heart
-        this.heart = this.add.sprite(centerX, centerY, 'heartbeat').play('heartbeat').setScale(0.30);
+        this.heart = this.add.sprite(centerX, centerY, 'heartbeat').play('heartbeat').setScale(0.2);
         this.physics.add.existing(this.heart);
         this.heart.body.setCircle(this.heart.width/2, 0, -16);
 
@@ -66,6 +69,9 @@ class Adrenaline extends Phaser.Scene {
         this.physics.add.overlap(this.heart, this.crosshair, () => {
             if(Phaser.Input.Keyboard.JustDown(this.cursors.space)) {
                 this.hit();
+                this.time.delayedCall(3000, () => {
+                    this.scene.start('menuScene');
+                })
             }
         })
 

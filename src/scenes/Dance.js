@@ -52,8 +52,9 @@ class Dance extends Phaser.Scene {
             }
         })
 
-        // start note recursion
-        this.addNote(this.noteDelay);
+        // start note recursion after delay
+        this.time.delayedCall(5000, () => {this.addNote(this.noteDelay);});
+        
         
         // set cursor keys
         this.cursors = this.input.keyboard.createCursorKeys();
