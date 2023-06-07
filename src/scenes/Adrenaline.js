@@ -10,7 +10,7 @@ class Adrenaline extends Phaser.Scene {
         this.crosshairAlive = true;
 
         // temp text
-        this.add.text(centerX, 50, "scene 3: adrenaline shot").setOrigin(0.5);
+        this.add.text(centerX, 20, "scene 3: adrenaline shot").setOrigin(0.5);
 
         // create animations
         this.anims.create({

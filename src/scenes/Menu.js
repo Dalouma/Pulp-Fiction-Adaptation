@@ -7,9 +7,15 @@ class Menu extends Phaser.Scene {
         // loadpath
         this.load.path = 'assets/';
         // load sprite(s)
+        // scene 1 assets
+        this.load.spritesheet('arrow', 'arrows.png', {frameWidth: 256, frameHeight: 256});
+        this.load.spritesheet('rainbowNote', 'rainbowNotes.png', {frameWidth: 256, frameHeight: 256});
+        this.load.image('square', 'square.png');
+        this.load.image('note', 'note.png');
+        this.load.image('scribbleNote', 'scribbleNote.png');
+        // scene 3 assets
         this.load.spritesheet('heart', 'scribbleHeart.png', {frameWidth: 256, frameHeight: 256});
         this.load.image('cross', 'crosshair.png');
-
     }
 
     create() {
@@ -23,7 +29,7 @@ class Menu extends Phaser.Scene {
 
     update() {
         if(Phaser.Input.Keyboard.JustDown(this.keySPACE)) {
-            this.scene.start('scene3');
+            this.scene.start('scene1');
         }
     }
 }
