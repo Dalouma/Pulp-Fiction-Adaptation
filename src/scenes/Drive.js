@@ -47,6 +47,9 @@ class Drive extends Phaser.Scene {
         this.heart.play('heartbeat').setScale(0.2);
         this.physics.add.existing(this.heart);
         this.heart.body.setCircle(this.heart.width/2, 0, -16);
+
+        // add car/obstacle group
+        this.carGroup = this.add.group();
         
         // set cursor keys
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -54,6 +57,22 @@ class Drive extends Phaser.Scene {
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+    }
+
+    addCar(delay) {
+        let nextDelay = delay;
+        if(this.notesDropped == 16){
+            nextDelay = 500;
+        }
+
+        // setup car
+        let nLane = Phaser.Math.Between(0,3);
+        let newCar = this.add.sprite(this.laneX[nLane], -50, 'square');
+        this.physics.add.existing(newCar);
+        newCar.body.setImmovable(true);
+        this.carGroup.add(newNote);
+
+        this.time.delayedCall(nextDelay, () => {this.addNote(nextDelay);} );
     }
 
     shiftLeft() {

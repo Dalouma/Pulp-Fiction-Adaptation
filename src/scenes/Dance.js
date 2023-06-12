@@ -34,7 +34,7 @@ class Dance extends Phaser.Scene {
         // add a line
         this.add.line(0,0, centerX-this.spacing*4,this.lineHeight, centerX+this.spacing*4,this.lineHeight, 0x000).setOrigin(0);
 
-        // add player square
+        // add player
         this.player = this.add.sprite(-100, h - 125, 'square');
         this.physics.add.existing(this.player);
         this.player.body.setImmovable(true);
