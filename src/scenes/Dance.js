@@ -15,6 +15,7 @@ class Dance extends Phaser.Scene {
          centerX + 3 * this.spacing]
         this.noteVelocity = 400;
         this.noteDelay = 1000;
+        this.dropping = false;
         this.notesDropped = 0;
         this.win = false;
 
@@ -34,7 +35,7 @@ class Dance extends Phaser.Scene {
         this.add.line(0,0, centerX-this.spacing*4,this.lineHeight, centerX+this.spacing*4,this.lineHeight, 0x000).setOrigin(0);
 
         // add player square
-        this.player = this.add.sprite(this.laneX[0], h - 125, 'square');
+        this.player = this.add.sprite(-100, h - 125, 'square');
         this.physics.add.existing(this.player);
         this.player.body.setImmovable(true);
 
@@ -46,6 +47,7 @@ class Dance extends Phaser.Scene {
         // player-note collision handling
         this.physics.add.collider(this.player, this.noteGroup, (player,note) => {
             note.destroy();
+            this.notesDropped++;
             if(this.notesDropped > 32){
                 this.win = true;
                 this.nextScene();
@@ -53,7 +55,7 @@ class Dance extends Phaser.Scene {
         })
 
         // start note recursion after delay
-        this.time.delayedCall(5000, () => {this.addNote(this.noteDelay);});
+        // this.time.delayedCall(5000, () => {this.addNote(this.noteDelay);});
         
         
         // set cursor keys
@@ -62,6 +64,13 @@ class Dance extends Phaser.Scene {
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+    }
+
+    startDropping() {
+        if(this.dropping == false) {
+            this.dropping = true;
+            this.time.delayedCall(2000, () => {this.addNote(this.noteDelay);});
+        }
     }
 
     addNote(delay) {
@@ -75,7 +84,6 @@ class Dance extends Phaser.Scene {
         let newNote = new Note(this, this.laneX[nLane], 0, this.noteVelocity, nColor).setScale(0.3);
         this.noteGroup.add(newNote);
         this.time.delayedCall(nextDelay, () => {this.addNote(nextDelay);} );
-        this.notesDropped++;
     }
 
     nextScene(){
@@ -88,14 +96,20 @@ class Dance extends Phaser.Scene {
 
     update() {
         // player control
-        if(Phaser.Input.Keyboard.JustDown(this.cursors.left)) {
+        if(this.cursors.left.isDown || keyA.isDown) {
+            this.startDropping();
             this.player.setX(this.laneX[0])
-        } else if(this.cursors.right.isDown || keyD.isDown) {
+        }
+        if(this.cursors.right.isDown || keyD.isDown) {
+            this.startDropping();
             this.player.setX(this.laneX[3])
         }
         if(this.cursors.up.isDown || keyW.isDown) {
+            this.startDropping();
             this.player.setX(this.laneX[2])
-        } else if(this.cursors.down.isDown || keyS.isDown) {
+        }
+        if(this.cursors.down.isDown || keyS.isDown) {
+            this.startDropping();
             this.player.setX(this.laneX[1])
         }
 
