@@ -20,6 +20,7 @@ class Adrenaline extends Phaser.Scene {
         this.add.text(centerX, 50, "We ONLY have ONE. I can't fuck this up.").setOrigin(0.5);
         this.add.text(centerX, 80, "Aim carefully.").setOrigin(0.5);
         this.add.text(centerX, h-20, "ARROWS: move       SPACE: strike").setOrigin(0.5);
+        // this.add.text(centerX, h-20, "SPACE: strike").setOrigin(0.5);
 
         // create animations
         this.anims.create({
