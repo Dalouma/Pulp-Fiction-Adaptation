@@ -8,6 +8,9 @@ class Drive extends Phaser.Scene {
         this.spacing = 50;
         this.lineHeight = h - 100;
         this.currentLane = 1;
+        this.carVelocity = 400;
+        this.lives = 3;
+        this.gameTime = 20000
 
         // lane spacing
         this.laneX = 
@@ -47,9 +50,27 @@ class Drive extends Phaser.Scene {
         this.heart.play('heartbeat').setScale(0.2);
         this.physics.add.existing(this.heart);
         this.heart.body.setCircle(this.heart.width/2, 0, -16);
+        this.heart.body.setImmovable(true);
 
         // add car/obstacle group
         this.carGroup = this.add.group();
+
+        // test addcar
+        this.addCar(1000);
+
+        // player-car collision
+        this.physics.add.collider(this.heart, this.carGroup, (heart,car) => {
+            car.destroy();
+            this.lives--;
+            if(this.lives == 0) {
+
+            }
+        }, null, this)
+
+        // game time
+        this.time.delayedCall(this.gameTime, () => {
+            this.scene.start('transitionScene')
+        })
         
         // set cursor keys
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -61,18 +82,31 @@ class Drive extends Phaser.Scene {
 
     addCar(delay) {
         let nextDelay = delay;
-        if(this.notesDropped == 16){
-            nextDelay = 500;
+        // if(this.notesDropped == 16){
+        //     nextDelay = 700;
+        // }
+
+        // num cars?
+        let numCars = Phaser.Math.Between(1,3);
+        let occupied= [];
+
+        // make row of cars
+        for(let i = 0; i < numCars; i++){
+            // make sure unique lane
+            let nLane = Phaser.Math.Between(0,3);
+            while(occupied.includes(nLane)) {
+                nLane = Phaser.Math.Between(0,3);
+            }
+            occupied.push(nLane);
+
+            // make car
+            let newCar = new Car(this, this.laneX[nLane], -50, this.carVelocity, 0, 'square')
+            this.physics.add.existing(newCar);
+            newCar.body.setImmovable(true);
+            this.carGroup.add(newCar);
         }
 
-        // setup car
-        let nLane = Phaser.Math.Between(0,3);
-        let newCar = this.add.sprite(this.laneX[nLane], -50, 'square');
-        this.physics.add.existing(newCar);
-        newCar.body.setImmovable(true);
-        this.carGroup.add(newNote);
-
-        this.time.delayedCall(nextDelay, () => {this.addNote(nextDelay);} );
+        this.time.delayedCall(nextDelay, () => {this.addCar(nextDelay);} );
     }
 
     shiftLeft() {

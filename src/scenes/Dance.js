@@ -81,14 +81,15 @@ class Dance extends Phaser.Scene {
 
         let nColor = Phaser.Math.Between(0,6);
         let nLane = Phaser.Math.Between(0,3);
-        let newNote = new Note(this, this.laneX[nLane], 0, this.noteVelocity, nColor).setScale(0.3);
+        let newNote = new Note(this, this.laneX[nLane], 0, this.noteVelocity, nColor);
+        newNote.setScale(0.3);
         this.noteGroup.add(newNote);
         this.time.delayedCall(nextDelay, () => {this.addNote(nextDelay);} );
     }
 
     nextScene(){
         if(this.win) {
-            this.scene.start('scene1.1');
+            this.scene.start('transitionScene');
         }else{
             console.log('rip')
         }

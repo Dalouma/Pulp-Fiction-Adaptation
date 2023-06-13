@@ -20,7 +20,7 @@ let config = {
             }
         }
     },
-    scene: [ Menu, Dance, DanceWin, Drive, Adrenaline ]
+    scene: [ Menu, Dance, Transition, Drive, Adrenaline ]
 };
 
 const game = new Phaser.Game(config);
@@ -33,3 +33,8 @@ let h = game.config.height;
 
 // define keys
 let keyW, keyA, keyS, keyD
+
+// scene tracker
+let gameOver = false;
+let nScene = 0;
+let sceneArr = ['scene1', 'scene2', 'scene3']

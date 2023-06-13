@@ -41,7 +41,9 @@ class Adrenaline extends Phaser.Scene {
         // add crosshair
         this.crosshair = this.add.sprite(centerX, centerY, 'cross').setScale(0.2);
         this.physics.add.existing(this.crosshair);
-        this.crosshair.body.setSize(10,10).setBoundsRectangle(null);
+        this.crosshair.body.setSize(10,10);
+        this.crosshair.body.setCollideWorldBounds(true);
+        
         /*
             Note to future self:
             I can set the bounds of where it can go too
