@@ -16,7 +16,7 @@ class DanceWin extends Phaser.Scene {
     update() {
         // trigger next scene on space
         if(Phaser.Input.Keyboard.JustDown(this.cursors.space)) {
-            this.scene.start('scene2')
+            this.scene.start('scene3')
         }
     }
 }
