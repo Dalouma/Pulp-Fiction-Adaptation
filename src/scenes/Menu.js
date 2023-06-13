@@ -16,6 +16,9 @@ class Menu extends Phaser.Scene {
         // scene 3 assets
         this.load.spritesheet('heart', 'scribbleHeart.png', {frameWidth: 256, frameHeight: 256});
         this.load.image('cross', 'crosshair.png');
+
+        // load bgm
+        this.load.audio('music', 'Chuck Berry.mp3');
     }
 
     create() {
@@ -25,6 +28,9 @@ class Menu extends Phaser.Scene {
 
         // keys
         this.keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+
+        // music for scene 1
+        danceMusic = this.sound.add('music', {volume: 0.15})
     }
 
     update() {

@@ -53,7 +53,9 @@ class Drive extends Phaser.Scene {
         this.heart.body.setImmovable(true);
 
         // add car/obstacle group
-        this.carGroup = this.add.group();
+        this.carGroup = this.add.group({
+            runChildUpdate: true
+        });
 
         // test addcar
         this.addCar(1000);
@@ -63,7 +65,8 @@ class Drive extends Phaser.Scene {
             car.destroy();
             this.lives--;
             if(this.lives == 0) {
-
+                this.heart.destroy();
+                this.time.delayedCall(2000, () => {this.scene.restart})
             }
         }, null, this)
 

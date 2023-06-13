@@ -16,7 +16,9 @@ class Note extends Phaser.Physics.Arcade.Sprite {
 
     update() {
         if(this.y > h + 50){
+            // console.log('note destroyed')
             this.destroy();
+            this.parentScene.lives--;
         }
     }
 

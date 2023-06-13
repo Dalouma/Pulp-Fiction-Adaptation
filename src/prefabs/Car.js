@@ -16,6 +16,7 @@ class Car extends Phaser.Physics.Arcade.Sprite {
 
     update() {
         if(this.y > h + 50){
+            // console.log('car destroyed')
             this.destroy();
         }
     }

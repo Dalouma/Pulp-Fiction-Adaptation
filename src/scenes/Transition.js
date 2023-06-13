@@ -4,7 +4,6 @@ class Transition extends Phaser.Scene {
     }
     
     create() {
-
         // temp text
         this.add.text(centerX, 20, 'transition scene').setOrigin(0.5);
 
@@ -14,19 +13,23 @@ class Transition extends Phaser.Scene {
 
         // post scene 1
         this.s1d1 = 'You\'re a pretty good dancer...';
+        this.s1d2 = 'Hahaha, you\'re terrible at dancing. We\'re you even trying?';
         if(nScene == 0){
-            this.typewriteText(this.s1d1, this.centerText)
+            this.centerText.text = 'Mia: '
+            if(danceWin){
+                this.typewriteText(this.s1d1, this.centerText)
+            }else{
+                this.typewriteText(this.s1d2, this.centerText)
+            }
         }
 
 
         // post scene 2
+        this.s2d1 = 'I made it. Gotta find a way to save her quick!';
         if(nScene == 1){
-            this.add.text(centerX, centerY, 'I made it. Gotta find a way to save her quick!').setOrigin(0.5);
+            this.centerText.text = 'Vincent: '
+            this.typewriteText(this.s2d1, this.centerText)
         }
-
-
-
-
 
 
         this.time.delayedCall(3000, () => {
@@ -37,6 +40,10 @@ class Transition extends Phaser.Scene {
         this.cursors = this.input.keyboard.createCursorKeys();
     }
 
+    /*
+        I got this from:
+        https://blog.ourcade.co/posts/2020/phaser-3-typewriter-text-effect-bitmap/
+    */
     typewriteText(text, label) {
         const length = text.length
         let i = 0
@@ -46,7 +53,7 @@ class Transition extends Phaser.Scene {
                 ++i
             },
             repeat: length - 1,
-            delay: 50
+            delay: 60
         })
     }
 
@@ -56,6 +63,7 @@ class Transition extends Phaser.Scene {
             // increment scene number
             nScene++;
             this.scene.start(sceneArr[nScene])
+            danceMusic.stop();
         }
     }
 }

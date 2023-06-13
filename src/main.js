@@ -38,3 +38,7 @@ let keyW, keyA, keyS, keyD
 let gameOver = false;
 let nScene = 0;
 let sceneArr = ['scene1', 'scene2', 'scene3']
+let danceWin = true;
+
+// music for scene 1
+let danceMusic;

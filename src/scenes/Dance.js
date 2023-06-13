@@ -4,6 +4,11 @@ class Dance extends Phaser.Scene {
     }
 
     create() {
+        // config
+        this.noteVelocity = 400;
+        this.noteDelay = 760;
+        this.lives = 4;
+
         // variables
         this.spacing = 50;
         this.lineHeight = h - 100;
@@ -13,11 +18,8 @@ class Dance extends Phaser.Scene {
          centerX - this.spacing,
          centerX + this.spacing,
          centerX + 3 * this.spacing]
-        this.noteVelocity = 400;
-        this.noteDelay = 1000;
         this.dropping = false;
         this.notesDropped = 0;
-        this.win = false;
 
         // change bg color
         this.cameras.main.setBackgroundColor('#cf8b42')
@@ -41,7 +43,7 @@ class Dance extends Phaser.Scene {
 
         // make note group
         this.noteGroup = this.add.group({
-            runChildUpate: true
+            runChildUpdate: true
         })
 
         // player-note collision handling
@@ -49,14 +51,9 @@ class Dance extends Phaser.Scene {
             note.destroy();
             this.notesDropped++;
             if(this.notesDropped > 32){
-                this.win = true;
                 this.nextScene();
             }
         })
-
-        // start note recursion after delay
-        // this.time.delayedCall(5000, () => {this.addNote(this.noteDelay);});
-        
         
         // set cursor keys
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -69,15 +66,16 @@ class Dance extends Phaser.Scene {
     startDropping() {
         if(this.dropping == false) {
             this.dropping = true;
-            this.time.delayedCall(2000, () => {this.addNote(this.noteDelay);});
+            danceMusic.play();
+            this.time.delayedCall(2700, () => {this.addNote(this.noteDelay);});
         }
     }
 
     addNote(delay) {
         let nextDelay = delay;
-        if(this.notesDropped == 16){
-            nextDelay = 500;
-        }
+        // if(this.notesDropped == 16){
+        //     nextDelay/=2;
+        // }
 
         let nColor = Phaser.Math.Between(0,6);
         let nLane = Phaser.Math.Between(0,3);
@@ -88,11 +86,7 @@ class Dance extends Phaser.Scene {
     }
 
     nextScene(){
-        if(this.win) {
-            this.scene.start('transitionScene');
-        }else{
-            console.log('rip')
-        }
+        this.scene.start('transitionScene');
     }
 
     update() {
@@ -112,6 +106,12 @@ class Dance extends Phaser.Scene {
         if(this.cursors.down.isDown || keyS.isDown) {
             this.startDropping();
             this.player.setX(this.laneX[1])
+        }
+
+        // check fail
+        if(this.lives == 0) {
+            danceWin = false;
+            this.nextScene();
         }
 
     }
