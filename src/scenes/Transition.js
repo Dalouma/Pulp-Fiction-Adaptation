@@ -9,7 +9,7 @@ class Transition extends Phaser.Scene {
 
 
         // centered text
-        this.centerText = this.add.text(centerX, centerY, '').setOrigin(0.5);
+        this.centerText = this.add.text(centerX, centerY, '').setOrigin(0.5,0);
 
         // pre scene 1
         this.miaLine = 'I do believe Marsellus, my husband, your boss,\n told you to take ME out and do WHATEVER I WANTED.\n Now I wanna dance, I wanna win. I want that trophy,\n so dance good.';

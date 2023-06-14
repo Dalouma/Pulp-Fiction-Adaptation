@@ -14,8 +14,13 @@ class Credits extends Phaser.Scene {
         this.add.text(centerX, this.textStart, 'Music', {fontSize: '28px'}).setOrigin(0.5);
         this.add.text(centerX, this.textStart+=30, 'Chuck Berry - You Can Never Tell (1964)').setOrigin(0.5);
         this.add.text(centerX, this.textStart+=30, 'David Fesliyan - Escape Chase (2019)').setOrigin(0.5);
-        this.add.text(centerX, this.textStart+=30, 'ART', {fontSize: '28px'}).setOrigin(0.5);
+        this.add.text(centerX, this.textStart+=40, 'ART', {fontSize: '28px'}).setOrigin(0.5);
         this.add.text(centerX, this.textStart+=30, 'Dance GIF: Pinterest/Tenor').setOrigin(0.5);
+        this.add.text(centerX, this.textStart+=40, 'SFX', {fontSize: '28px'}).setOrigin(0.5);
+        this.add.text(centerX, this.textStart+=30, 'freesound.org :').setOrigin(0.5);
+        this.add.text(centerX, this.textStart+=30, 'User: \"FeliUsers\"').setOrigin(0.5);
+        this.add.text(centerX, this.textStart+=30, 'User: \"JustInvoke\"').setOrigin(0.5);
+        this.add.text(centerX, this.textStart+=30, 'User: \"dslrguide\"').setOrigin(0.5);
 
 
         // bottom text
