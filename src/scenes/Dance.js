@@ -8,8 +8,10 @@ class Dance extends Phaser.Scene {
         this.noteVelocity = 400;
         this.noteDelay = 760;
         this.lives = 4;
+        this.notesToFinish = 50;
 
         // variables
+        this.gifSpawned = false;
         this.spacing = 50;
         this.lineHeight = h - 100;
         this.spawnedNotes = 0;
@@ -26,6 +28,17 @@ class Dance extends Phaser.Scene {
 
         // temp text
         this.add.text(centerX, 20, "scene 1: dance competition").setOrigin(0.5);
+
+        // dance gif
+        this.anims.create({
+            key: 'danceGIF',
+            frameRate: 5,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('pulpDance', {
+                start: 0,
+                end: 5
+            })
+        });
         
         // add arrows
         this.add.sprite(this.laneX[0], h - 50, 'arrow', 0).setScale(0.2);
@@ -50,7 +63,7 @@ class Dance extends Phaser.Scene {
         this.physics.add.collider(this.player, this.noteGroup, (player,note) => {
             note.destroy();
             this.notesDropped++;
-            if(this.notesDropped > 32){
+            if(this.notesDropped > this.notesToFinish){
                 this.nextScene();
             }
         })
@@ -73,9 +86,9 @@ class Dance extends Phaser.Scene {
 
     addNote(delay) {
         let nextDelay = delay;
-        // if(this.notesDropped == 16){
-        //     nextDelay/=2;
-        // }
+        if(!this.gifSpawned && this.notesDropped == 16){
+            this.add.sprite(centerX, centerY, 'danceGIF', 0).play('danceGIF')
+        }
 
         let nColor = Phaser.Math.Between(0,6);
         let nLane = Phaser.Math.Between(0,3);

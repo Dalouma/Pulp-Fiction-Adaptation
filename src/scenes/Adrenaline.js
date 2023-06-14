@@ -44,11 +44,6 @@ class Adrenaline extends Phaser.Scene {
         this.crosshair.body.setSize(10,10);
         this.crosshair.body.setCollideWorldBounds(true);
         
-        /*
-            Note to future self:
-            I can set the bounds of where it can go too
-        */
-
         // add calmer group and add calmers
         this.calmerGroup = this.add.group();
         for(let i = 0; i < this.numCalmers; i++) {

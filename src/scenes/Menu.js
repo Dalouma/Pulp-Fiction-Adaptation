@@ -13,12 +13,15 @@ class Menu extends Phaser.Scene {
         this.load.image('square', 'square.png');
         this.load.image('note', 'note.png');
         this.load.image('scribbleNote', 'scribbleNote.png');
+        // dance gif
+        this.load.spritesheet('pulpDance', 'pulp dance.png', {frameWidth: 498, frameHeight: 324});
         // scene 3 assets
         this.load.spritesheet('heart', 'scribbleHeart.png', {frameWidth: 256, frameHeight: 256});
         this.load.image('cross', 'crosshair.png');
 
         // load bgm
         this.load.audio('music', 'Chuck Berry.mp3');
+        this.load.audio('tenseMusic', 'Escape Chase.mp3');
     }
 
     create() {
@@ -30,7 +33,8 @@ class Menu extends Phaser.Scene {
         this.keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
         // music for scene 1
-        danceMusic = this.sound.add('music', {volume: 0.15})
+        danceMusic = this.sound.add('music', {volume: 0.2});
+        panicMusic = this.sound.add('tenseMusic', {volume: 0.1});
     }
 
     update() {

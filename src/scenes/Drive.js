@@ -12,6 +12,9 @@ class Drive extends Phaser.Scene {
         this.lives = 3;
         this.gameTime = 20000
 
+        // start music
+        panicMusic.play();
+
         // lane spacing
         this.laneX = 
         [centerX - 3 * this.spacing, 

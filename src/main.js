@@ -42,3 +42,4 @@ let danceWin = true;
 
 // music for scene 1
 let danceMusic;
+let panicMusic;

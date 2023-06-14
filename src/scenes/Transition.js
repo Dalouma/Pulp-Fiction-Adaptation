@@ -62,8 +62,8 @@ class Transition extends Phaser.Scene {
         if(Phaser.Input.Keyboard.JustDown(this.cursors.space) && !gameOver) {
             // increment scene number
             nScene++;
-            this.scene.start(sceneArr[nScene])
             danceMusic.stop();
+            this.scene.start(sceneArr[nScene])
         }
     }
 }
