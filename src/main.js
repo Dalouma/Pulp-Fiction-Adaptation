@@ -1,3 +1,23 @@
+/*
+    Pulp Fiction Game Adapatation
+    by: David Amaya
+
+    CMPM 120, Spring 2023
+    This is a game adaptation for the film Pulp Fiction that I made
+    for a final project.
+
+
+    Major Phaser components used:
+        - Arcade Physics for collision detection
+        - Text objects w/ typewriter effect for character lines
+        - Animation manager for dancing GIF and heart animation
+        - Timers to trigger events
+
+*/
+
+
+
+
 // honesty is the best policy
 'use strict';
 
