@@ -36,7 +36,7 @@ let keyW, keyA, keyS, keyD
 
 // scene tracker
 let gameOver = false;
-let nScene = 0;
+let nScene = -1;
 let sceneArr = ['scene1', 'scene2', 'scene3']
 let danceWin = true;
 

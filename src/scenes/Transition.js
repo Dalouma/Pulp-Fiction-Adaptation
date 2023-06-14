@@ -5,15 +5,22 @@ class Transition extends Phaser.Scene {
     
     create() {
         // temp text
-        this.add.text(centerX, 20, 'transition scene').setOrigin(0.5);
+        // this.add.text(centerX, 20, 'transition scene').setOrigin(0.5);
 
 
         // centered text
         this.centerText = this.add.text(centerX, centerY, '').setOrigin(0.5);
 
+        // pre scene 1
+        this.miaLine = 'I do believe Marsellus, my husband, your boss,\n told you to take ME out and do WHATEVER I WANTED.\n Now I wanna dance, I wanna win. I want that trophy,\n so dance good.';
+        if(nScene == -1){
+            this.centerText.text = 'Mia: '
+            this.typewriteText(this.miaLine, this.centerText)
+        }
+
         // post scene 1
         this.s1d1 = 'You\'re a pretty good dancer...';
-        this.s1d2 = 'Hahaha, you\'re terrible at dancing. We\'re you even trying?';
+        this.s1d2 = 'Hahaha, you\'re terrible at dancing. Were you even trying?';
         if(nScene == 0){
             this.centerText.text = 'Mia: '
             if(danceWin){

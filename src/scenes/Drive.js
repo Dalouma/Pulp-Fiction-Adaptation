@@ -5,6 +5,7 @@ class Drive extends Phaser.Scene {
 
     create() {
         // variables
+        this.gameStart = false;
         this.spacing = 50;
         this.lineHeight = h - 100;
         this.currentLane = 1;
@@ -26,7 +27,7 @@ class Drive extends Phaser.Scene {
         this.cameras.main.setBackgroundColor('#050517')
 
         // temp text
-        this.add.text(centerX, 20, "scene 2: emergency drive").setOrigin(0.5);
+        // this.add.text(centerX, 20, "scene 2: emergency drive").setOrigin(0.5);
 
         // add a line
         // this.add.line(0,0, centerX-this.spacing*4,this.lineHeight, centerX+this.spacing*4,this.lineHeight, 0x000).setOrigin(0);
@@ -60,11 +61,8 @@ class Drive extends Phaser.Scene {
             runChildUpdate: true
         });
 
-        // test addcar
-        // this.add.text()
-
-
-        this.addCar(1000);
+        // quick instructions
+        this.add.text(centerX, 30, 'Dodge the squares with <- and -> OR A and D', {fontSize: '22px'}).setOrigin(0.5);
 
         // player-car collision
         this.physics.add.collider(this.heart, this.carGroup, (heart,car) => {
@@ -82,10 +80,6 @@ class Drive extends Phaser.Scene {
             }
         }, null, this)
 
-        // game time
-        this.time.delayedCall(this.gameTime, () => {
-            this.scene.start('transitionScene')
-        })
         
         // set cursor keys
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -95,11 +89,22 @@ class Drive extends Phaser.Scene {
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
     }
 
+    startGame() {
+        if(!this.gameStart){
+            this.gameStart = true;
+            this.time.delayedCall(3000, () => {
+                this.addCar(1000);
+            })
+
+            // game time
+            this.time.delayedCall(this.gameTime, () => {
+                this.scene.start('transitionScene')
+            })
+        }
+    }
+
     addCar(delay) {
         let nextDelay = delay;
-        // if(this.notesDropped == 16){
-        //     nextDelay = 700;
-        // }
 
         // num cars?
         let numCars = Phaser.Math.Between(1,3);
@@ -141,9 +146,11 @@ class Drive extends Phaser.Scene {
     update() {
         // player control
         if(Phaser.Input.Keyboard.JustDown(this.cursors.left) || Phaser.Input.Keyboard.JustDown(keyA)) {
+            this.startGame();
             this.shiftLeft();
         }
         if(Phaser.Input.Keyboard.JustDown(this.cursors.right) || Phaser.Input.Keyboard.JustDown(keyD)) {
+            this.startGame();
             this.shiftRight();
         }
 

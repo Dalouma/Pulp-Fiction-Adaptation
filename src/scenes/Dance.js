@@ -24,7 +24,7 @@ class Dance extends Phaser.Scene {
         this.notesDropped = 0;
 
         // change bg color
-        this.cameras.main.setBackgroundColor('#cf8b42')
+        this.cameras.main.setBackgroundColor('#8f1414')
 
         // temp text
         // this.add.text(centerX, 20, "scene 1: dance competition").setOrigin(0.5);

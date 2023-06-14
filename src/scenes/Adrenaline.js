@@ -16,7 +16,7 @@ class Adrenaline extends Phaser.Scene {
         this.cameras.main.setBackgroundColor('#320554');
 
         // temp text
-        this.add.text(centerX, 20, "scene 3: adrenaline shot").setOrigin(0.5);
+        // this.add.text(centerX, 20, "scene 3: adrenaline shot").setOrigin(0.5);
         this.add.text(centerX, 50, "We ONLY have ONE. I can't fuck this up.").setOrigin(0.5);
         this.add.text(centerX, 80, "Aim carefully.").setOrigin(0.5);
         this.add.text(centerX, h-20, "ARROWS: move       SPACE: strike").setOrigin(0.5);
@@ -66,7 +66,9 @@ class Adrenaline extends Phaser.Scene {
         this.physics.add.overlap(this.heart, this.crosshair, () => {
             if(Phaser.Input.Keyboard.JustDown(this.cursors.space)) {
                 this.hit();
+                panicMusic.stop();
                 this.time.delayedCall(3000, () => {
+                    nScene = -1
                     this.scene.start('menuScene');
                 })
             }
