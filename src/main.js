@@ -13,14 +13,14 @@ let config = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: true,
+            // debug: true,
             gravity: {
                 x: 0,
                 y: 0
             }
         }
     },
-    scene: [ Menu, Dance, Transition, Drive, Adrenaline ]
+    scene: [ Menu, Dance, Transition, Drive, Adrenaline, Credits ]
 };
 
 const game = new Phaser.Game(config);

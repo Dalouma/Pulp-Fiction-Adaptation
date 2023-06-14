@@ -61,15 +61,24 @@ class Drive extends Phaser.Scene {
         });
 
         // test addcar
+        // this.add.text()
+
+
         this.addCar(1000);
 
         // player-car collision
         this.physics.add.collider(this.heart, this.carGroup, (heart,car) => {
             car.destroy();
             this.lives--;
+
+            // play random impact sound
+            let nImpact = Phaser.Math.Between(1,3);
+            this.sound.play(`impact${nImpact}`, {volume: 0.5})
+
             if(this.lives == 0) {
                 this.heart.destroy();
-                this.time.delayedCall(2000, () => {this.scene.restart})
+                panicMusic.stop();
+                this.time.delayedCall(2000, () => {this.scene.restart()})
             }
         }, null, this)
 

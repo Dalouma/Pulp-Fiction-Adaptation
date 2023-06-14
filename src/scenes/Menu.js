@@ -15,6 +15,10 @@ class Menu extends Phaser.Scene {
         this.load.image('scribbleNote', 'scribbleNote.png');
         // dance gif
         this.load.spritesheet('pulpDance', 'pulp dance.png', {frameWidth: 498, frameHeight: 324});
+        // scene 2 sfx
+        this.load.audio('impact1', 'impact1.mp3')
+        this.load.audio('impact2', 'impact2.wav')
+        this.load.audio('impact3', 'impact3.wav')
         // scene 3 assets
         this.load.spritesheet('heart', 'scribbleHeart.png', {frameWidth: 256, frameHeight: 256});
         this.load.image('cross', 'crosshair.png');
@@ -26,11 +30,14 @@ class Menu extends Phaser.Scene {
 
     create() {
         // menu text
-        this.add.text(centerX, centerY - 50, "This is the Menu").setOrigin(0.5);
-        this.add.text(centerX, centerY + 50, "Press SPACE to continue").setOrigin(0.5);
+        this.add.text(centerX, centerY - 100, "Pulp Fiction Game Adaptation", {fontSize: '28px'}).setOrigin(0.5);
+        this.add.text(centerX, centerY - 70, "By David Amaya").setOrigin(0.5);
+        this.add.text(centerX, centerY + 50, "Press SPACE to play").setOrigin(0.5);
+        this.add.text(centerX, h - 20, "Press C for credits").setOrigin(0.5);
 
         // keys
         this.keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this.keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
 
         // music for scene 1
         danceMusic = this.sound.add('music', {volume: 0.2});
@@ -40,6 +47,9 @@ class Menu extends Phaser.Scene {
     update() {
         if(Phaser.Input.Keyboard.JustDown(this.keySPACE)) {
             this.scene.start('scene1');
+        }
+        if(Phaser.Input.Keyboard.JustDown(this.keyC)) {
+            this.scene.start('creditsScene');
         }
     }
 }

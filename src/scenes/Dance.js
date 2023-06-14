@@ -27,7 +27,7 @@ class Dance extends Phaser.Scene {
         this.cameras.main.setBackgroundColor('#cf8b42')
 
         // temp text
-        this.add.text(centerX, 20, "scene 1: dance competition").setOrigin(0.5);
+        // this.add.text(centerX, 20, "scene 1: dance competition").setOrigin(0.5);
 
         // dance gif
         this.anims.create({
